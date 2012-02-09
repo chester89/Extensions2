@@ -22,15 +22,6 @@ namespace Extensions2.UnitTests
             }
 
             [Fact]
-            public void Throws_WhenEndPositionIsNegative()
-            {
-                int startPosition = 7;
-                int endPosition = -3;
-                Assert.Throws<ArgumentException>(
-                    () => someArbitraryString.SubstringOnIndex(startPosition, endPosition));
-            }
-
-            [Fact]
             public void Throws_WhenEndPositionIsLessThanStartPosition()
             {
                 int startPosition = 20;
