@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions2", "Extensions2\Extensions2.csproj", "{F07F88F9-A2CE-4F09-8B34-B84AD4281E7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions2.UnitTests", "Extensions2.UnitTests\Extensions2.UnitTests.csproj", "{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{10313902-827A-4E11-AD65-1909F9C70A08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,10 @@ Global
 		{F07F88F9-A2CE-4F09-8B34-B84AD4281E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F07F88F9-A2CE-4F09-8B34-B84AD4281E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F07F88F9-A2CE-4F09-8B34-B84AD4281E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
