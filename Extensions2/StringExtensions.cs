@@ -68,8 +68,10 @@ namespace Extensions2
         /// <param name = "endPosition">Zero-based ending position of a substring</param>
         public static string SubstringOnIndex(this string source, int startPosition, int endPosition)
         {
-            //Contract.Requires<ArgumentException>(startPosition > 0);
-            //Contract.Requires<ArgumentException>(endPosition >= startPosition);
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(source));
+            Contract.Requires<ArgumentException>(startPosition >= 0);
+            Contract.Requires<ArgumentException>(endPosition >= startPosition);
+            Contract.Requires<ArgumentException>(endPosition < source.Length);
             return source.Substring(startPosition, endPosition - startPosition + 1);
         }
 

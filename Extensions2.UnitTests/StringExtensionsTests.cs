@@ -46,9 +46,9 @@ namespace Extensions2.UnitTests
             }
 
             [Fact]
-            public void ReturnsEmptyString_WhenParameterStringIsEmpty()
+            public void Throws_WhenParameterStringIsEmpty()
             {
-                Assert.Equal(0, string.Empty.SubstringOnIndex(10, 15).Length);
+                Assert.Throws<ArgumentException>(() => string.Empty.SubstringOnIndex(10, 15).Length);
             }
 
             [Fact]
