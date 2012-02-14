@@ -10,7 +10,7 @@ namespace Extensions2.UnitTests
     {
         public class SubstringOnIndexTests
         {
-            private string someArbitraryString = "someArbitraryString";
+            private const string SomeArbitraryString = "someArbitraryString";
 
             [Fact]
             public void Throws_WhenStartPositionIsNegative()
@@ -18,7 +18,7 @@ namespace Extensions2.UnitTests
                 int startPosition = -10;
                 int endPosition = 5;
                 Assert.Throws<ArgumentException>(
-                    () => someArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
@@ -27,7 +27,7 @@ namespace Extensions2.UnitTests
                 int startPosition = 20;
                 int endPosition = 10;
                 Assert.Throws<ArgumentException>(
-                    () => someArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
@@ -36,7 +36,7 @@ namespace Extensions2.UnitTests
                 int startPosition = 5;
                 int endPosition = 100;
                 Assert.Throws<ArgumentException>(
-                    () => someArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
@@ -52,11 +52,31 @@ namespace Extensions2.UnitTests
             }
 
             [Fact]
-            public void ReturnsCorrectResult()
+            public void ReturnsCorrectResult_WhenSourceContainsSubstring()
             {
                 Assert.True("Hello world".SubstringOnIndex(0, 4).Equals("Hello"));
             }
+
+            [Fact]
+            public void ReturnsCorrectResult_WhenSourceDoesntContainSubstring()
+            {
+                Assert.False(SomeArbitraryString.SubstringOnIndex(2, 6).Equals("Hello"));
+            }
         }
 
+        public class SubstringCountTests
+        {
+            [Fact]
+            public void ReturnsZero_WhenNoSubstringsFound()
+            {
+                Assert.True("SomeString".SubstringCount("Hello") == 0);
+            }
+
+            [Fact]
+            public void Throws_IfSourceIsNull()
+            {
+                Assert.Throws<ArgumentNullException>(() => (null as string).SubstringCount("hello"));
+            }
+        }
     }
 }

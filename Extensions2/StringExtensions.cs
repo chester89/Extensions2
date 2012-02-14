@@ -23,7 +23,10 @@ namespace Extensions2
             return elements.Any(source.Contains);
         }
 
-        //Todo: comments
+        /// <summary>
+        /// Checks if <paramref name="source"/> starts with any string from <paramref name="elements"/> array
+        /// </summary>
+        /// <returns>True if <paramref name="source"/> contains at least one element from <paramref name="elements"/>; otherwise, false</returns>
         public static bool StartsWithAny(this string source, params string[] elements)
         {
             return elements.Any(source.StartsWith);
@@ -76,10 +79,11 @@ namespace Extensions2
         }
 
         /// <summary>
-        ///   Возвращает количество вхождений <paramref name = "substring" /> в <paramref name = "source" />
+        ///   Gets a number of occurences of <paramref name = "substring" /> inside <paramref name = "source" />
         /// </summary>
         public static int SubstringCount(this string source, string substring)
         {
+            Contract.Requires<ArgumentNullException>(source != null);
             var result = 0;
             if (source.Contains(substring))
             {
