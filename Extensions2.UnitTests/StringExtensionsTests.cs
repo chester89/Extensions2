@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Extensions2.UnitTests
 {
@@ -66,11 +67,14 @@ namespace Extensions2.UnitTests
 
         public class SubstringCountTests
         {
-            [Fact]
-            public void ReturnsZero_WhenNoSubstringsFound()
+            [Theory]
+            [InlineData("Hello world", "Nope", 0)]
+            [InlineData("Hello world", "Hell", 1)]
+            [InlineData("Something wrong in the winter", "th", 2)]
+            public void ReturnsProperResult(string source, string substring, int expectedCount)
             {
-                Assert.True("SomeString".SubstringCount("Hello") == 0);
-            }
+                Assert.True(source.SubstringCount(substring) == expectedCount);
+            }          
 
             [Fact]
             public void Throws_IfSourceIsNull()

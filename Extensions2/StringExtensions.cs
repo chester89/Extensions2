@@ -32,6 +32,21 @@ namespace Extensions2
             return elements.Any(source.StartsWith);
         }
 
+        public static bool EndsWithAny(this string source, params string[] elements)
+        {
+            return elements.Any(source.EndsWith);
+        }
+
+        public static bool IsAnyOf(this string source, params string[] elements)
+        {
+            return elements.Any(source.Equals);
+        }
+
+        public static bool IsNotAnyOf(this string source, params string[] elements)
+        {
+            return !IsAnyOf(source, elements);
+        }
+
         //Todo: comments
         public static string RemoveAll(this string source, params char[] characters)
         {
@@ -91,7 +106,12 @@ namespace Extensions2
                 {
                     result += 1;
                     var firstPosition = source.IndexOf(substring);
-                    source = source.SubstringOnIndex(0, firstPosition - 1) +
+                    var head = string.Empty;
+                    if (firstPosition > 1)
+                    {
+                        head = source.SubstringOnIndex(0, firstPosition - 1);
+                    }
+                    source = head +
                              source.Substring(firstPosition + substring.Length);
                 }
             }
