@@ -111,8 +111,7 @@ namespace Extensions2
                     {
                         head = source.SubstringOnIndex(0, firstPosition - 1);
                     }
-                    source = head +
-                             source.Substring(firstPosition + substring.Length);
+                    source = head + source.Substring(firstPosition + substring.Length);
                 }
             }
             return result;
