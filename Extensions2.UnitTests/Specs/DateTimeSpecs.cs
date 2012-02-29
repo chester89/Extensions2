@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace Extensions2.UnitTests.Specs
 {
-    [Subject("Calculating difference between two dates")]
+    [Subject("Calculating diff between two dates in the same year")]
     public class When_dates_are_inside_one_month_of_the_same_year : DateTimeIntervalSpecBase
     {
         private Establish context = () =>
@@ -17,7 +17,7 @@ namespace Extensions2.UnitTests.Specs
         private It should_not_consider_month_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year);
     }
 
-    [Subject("Calculating difference between two dates")]
+    [Subject("Calculating diff between two dates in the same year")]
     public class When_dates_are_from_nearest_months_in_the_same_year: DateTimeIntervalSpecBase
     {
         private Establish context = () =>
@@ -31,7 +31,7 @@ namespace Extensions2.UnitTests.Specs
         private It should_not_consider_year_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year);
     }
 
-    [Subject("Calculating difference between two dates")]
+    [Subject("Calculating diff between two dates in the same year")]
     public class When_dates_are_from_distant_months_in_the_same_year: DateTimeIntervalSpecBase
     {
         private Establish context = () =>
@@ -45,7 +45,7 @@ namespace Extensions2.UnitTests.Specs
         private It should_not_consider_year_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year);
     }
 
-    [Subject("Calculating difference between two dates")]
+    [Subject("Calculating diff between two dates in the same year")]
     public class When_dates_are_from_distant_months_with_days_overflow_in_the_same_year: DateTimeIntervalSpecBase
     {
         private Establish context = () =>
@@ -59,7 +59,21 @@ namespace Extensions2.UnitTests.Specs
         private It should_not_consider_year_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year);
     }
 
-    [Subject("Calculating difference between two dates")]
+    [Subject("Calculating diff between two days from different years")]
+    public class When_dates_are_from_different_years : DateTimeIntervalSpecBase
+    {
+        private Establish context = () =>
+        {
+            Left = new DateTime(2011, 2, 1);
+            Right = new DateTime(2012, 2, 10);
+        };
+
+        It should_respect_days_inside_one_month = () => Result.Days.ShouldEqual(Right.Day - Left.Day);
+        private It should_respect_month_equality = () => Result.Months.ShouldEqual(Right.Month - Left.Month);
+        private It should_consider_year_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year);
+    }
+
+    [Subject("Calculating diff between two dates from different years")]
     public class When_dates_are_from_different_years_and_month_underflows : DateTimeIntervalSpecBase
     {
         private Establish context = () =>
@@ -73,17 +87,17 @@ namespace Extensions2.UnitTests.Specs
         private It should_not_consider_years_difference = () => Result.Years.ShouldEqual(0);
     }
 
-    [Subject("Calculating difference between two days")]
-    public class When_dates_are_from_different_years: DateTimeIntervalSpecBase
+    [Subject("Calculating diff between two dates from different years")]
+    public class When_dates_are_from_different_years_and_days_underflow_propagates: DateTimeIntervalSpecBase
     {
         private Establish context = () =>
                                         {
-                                            Left = new DateTime(2011, 2, 1);
-                                            Right = new DateTime(2012, 2, 10);
+                                            Left = new DateTime(2010, 8, 10);
+                                            Right = new DateTime(2011, 8, 7);
                                         };
 
-        It should_respect_days_inside_one_month = () => Result.Days.ShouldEqual(Right.Day - Left.Day);
-        private It should_respect_month_equality = () => Result.Months.ShouldEqual(Right.Month - Left.Month);
-        private It should_consider_year_difference = () => Result.Years.ShouldEqual(1);
+        private It should_consider_days_underflow = () => Result.Days.ShouldEqual(Right.Day + DateTime.DaysInMonth(Left.Year, Left.Month) - Left.Day);
+        private It should_consider_month_difference = () => Result.Months.ShouldEqual(DateTimeExtensions.AmountOfMonthsInAYear - 1);
+        It should_consider_years_difference = () => Result.Years.ShouldEqual(Right.Year - Left.Year - 1);
     }
 }

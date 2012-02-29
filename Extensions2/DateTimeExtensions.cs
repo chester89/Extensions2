@@ -7,6 +7,8 @@ namespace Extensions2
 {
     public static class DateTimeExtensions
     {
+        public const int AmountOfMonthsInAYear = 12;
+
         public static DateDifference DayDifferenceWith(this DateTime left, DateTime right)
         {
             int daysAmount = 0;
@@ -19,14 +21,13 @@ namespace Extensions2
             daysAmount = DateTime.DaysInMonth(year, left.Month) - left.Day + right.Day;
 
             var monthAmount = 0;
-            const int amountOfMonthsInAYear = 12;
             if (right.Month > left.Month)
             {
                 monthAmount = right.Month - left.Month;
             }
             else
             {
-                monthAmount = amountOfMonthsInAYear + right.Month - left.Month;
+                monthAmount = AmountOfMonthsInAYear + right.Month - left.Month;
                 if (right.Day <= left.Day)
                 {
                     monthAmount -= 1;
@@ -44,9 +45,9 @@ namespace Extensions2
             
             //convert months to years if months overflow
             var years = 0;
-            while (monthAmount >= amountOfMonthsInAYear)
+            while (monthAmount >= AmountOfMonthsInAYear)
             {
-                monthAmount -= amountOfMonthsInAYear;
+                monthAmount -= AmountOfMonthsInAYear;
                 years += 1;
             }
 
