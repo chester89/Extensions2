@@ -1,6 +1,6 @@
 obj
 bin
-packages/
+src/packages/
 _ReSharper.*
 .nuget/
 *.csproj.user
@@ -11,4 +11,4 @@ _ReSharper.*
 *.swp
 *.DotSettings*
 *.DotSettings.user
-!packages/repositories.config
+!src/packages/repositories.config

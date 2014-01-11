@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions2", "Extensions2\Extensions2.csproj", "{F07F88F9-A2CE-4F09-8B34-B84AD4281E7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions2.UnitTests", "Extensions2.UnitTests\Extensions2.UnitTests.csproj", "{4AE94AAC-29BF-426E-87AC-49111DC5FCAF}"
