@@ -36,8 +36,7 @@ namespace Extensions2.UnitTests
             {
                 int startPosition = 5;
                 int endPosition = 100;
-                Assert.Throws<ArgumentException>(
-                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                Assert.Throws<ArgumentException>(() => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
