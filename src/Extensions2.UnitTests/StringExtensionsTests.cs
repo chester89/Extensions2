@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using Xunit.Extensions;
+using Xunit.Sdk;
 
 namespace Extensions2.UnitTests
 {
@@ -18,8 +19,7 @@ namespace Extensions2.UnitTests
             {
                 int startPosition = -10;
                 int endPosition = 5;
-                Assert.Throws<ArgumentException>(
-                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                Assert.Throws<TraceAssertException>(() => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
@@ -27,8 +27,7 @@ namespace Extensions2.UnitTests
             {
                 int startPosition = 20;
                 int endPosition = 10;
-                Assert.Throws<ArgumentException>(
-                    () => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                Assert.Throws<TraceAssertException>(() => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
@@ -36,19 +35,19 @@ namespace Extensions2.UnitTests
             {
                 int startPosition = 5;
                 int endPosition = 100;
-                Assert.Throws<ArgumentException>(() => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
+                Assert.Throws<TraceAssertException>(() => SomeArbitraryString.SubstringOnIndex(startPosition, endPosition));
             }
 
             [Fact]
             public void Throws_WhenStringIsNull()
             {
-                Assert.Throws<ArgumentException>(() => (null as string).SubstringOnIndex(0, 10));
+                Assert.Throws<TraceAssertException>(() => (null as string).SubstringOnIndex(0, 10));
             }
 
             [Fact]
             public void Throws_WhenParameterStringIsEmpty()
             {
-                Assert.Throws<ArgumentException>(() => string.Empty.SubstringOnIndex(10, 15).Length);
+                Assert.Throws<TraceAssertException>(() => string.Empty.SubstringOnIndex(10, 15).Length);
             }
 
             [Fact]
@@ -78,7 +77,7 @@ namespace Extensions2.UnitTests
             [Fact]
             public void Throws_IfSourceIsNull()
             {
-                Assert.Throws<ArgumentNullException>(() => (null as string).SubstringCount("hello"));
+                Assert.Throws<TraceAssertException>(() => (null as string).SubstringCount("hello"));
             }
         }
     }
