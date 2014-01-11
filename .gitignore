@@ -9,5 +9,6 @@ _ReSharper.*
 *.suo
 *.cache
 *.swp
-
+*.DotSettings*
+*.DotSettings.user
 !packages/repositories.config
