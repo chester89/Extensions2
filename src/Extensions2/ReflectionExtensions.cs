@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -12,16 +13,17 @@ namespace Extensions2
         /// </summary>
         public static bool IsClosedTypeOf(this Type closedType, Type genericType)
         {
-            if (genericType.IsGenericTypeDefinition)
+            Contract.Requires<NullReferenceException>(closedType != null);
+            Contract.Requires<NullReferenceException>(genericType != null);
+            Contract.Requires<ArgumentException>(genericType.IsGenericTypeDefinition);
+            Contract.Requires<ArgumentException>(closedType.IsGenericType);
+            var arguments = closedType.GetGenericArguments();
+            if (arguments.Any())
             {
-                var arguments = closedType.GetGenericArguments();
-                if (arguments.Any())
+                var closedGenericType = genericType.MakeGenericType(arguments);
+                if (closedGenericType == closedType || closedType.IsAssignableTo(closedGenericType))
                 {
-                    var closedGenericType = genericType.MakeGenericType(arguments);
-                    if (closedGenericType == closedType)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;

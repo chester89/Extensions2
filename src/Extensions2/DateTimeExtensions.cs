@@ -8,6 +8,7 @@ namespace Extensions2
     public static class DateTimeExtensions
     {
         public const int AmountOfMonthsInAYear = 12;
+        public const int AmountOfDaysInAWeek = 7;
 
         public static DateDifference DayDifferenceWith(this DateTime left, DateTime right)
         {
@@ -59,6 +60,25 @@ namespace Extensions2
             }
 
             return DateDifference.Create(daysAmount, monthAmount - amountOfEdgeMonths + calculatedMonth, years);
+        }
+
+        /// <summary>
+        /// Rewinds the date to previous <paramref name="dayOfWeek"/>
+        /// </summary>
+        /// <param name="dayOfWeek">Day of week to rewind to</param>
+        public static DateTime RewindToNext(this DateTime date, DayOfWeek dayOfWeek)
+        {
+            var daysAmount = ((int)dayOfWeek - (int)date.DayOfWeek) > 0 ?
+                ((int)dayOfWeek - (int)date.DayOfWeek) : (AmountOfDaysInAWeek + (int)dayOfWeek - (int)date.DayOfWeek);
+            return date.AddDays(daysAmount);
+        }
+
+        /// <summary>
+        /// Rewinds the date to next <paramref name="dayOfWeek"/>
+        /// </summary>
+        public static DateTime RewindToPrevious(this DateTime date, DayOfWeek dayOfWeek)
+        {
+            return date.AddDays(-1 * Math.Abs((int)date.DayOfWeek - (int)dayOfWeek));
         }
     }
 }

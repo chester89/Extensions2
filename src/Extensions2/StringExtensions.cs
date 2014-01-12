@@ -17,7 +17,10 @@ namespace Extensions2
             return characters.Select(character => source.IndexOf(character)).Any(result => result != -1);
         }
 
-        //Todo: comments
+        /// <summary>
+        ///   Determines whether a string contains any substrings from the <paramref name = "elements" /> array
+        /// </summary>
+        /// <returns>If string contains at least one substring, returns true; otherwise, false</returns>
         public static bool ContainsAny(this string source, params string[] elements)
         {
             return elements.Any(source.Contains);
@@ -26,17 +29,25 @@ namespace Extensions2
         /// <summary>
         /// Checks if <paramref name="source"/> starts with any string from <paramref name="elements"/> array
         /// </summary>
-        /// <returns>True if <paramref name="source"/> contains at least one element from <paramref name="elements"/>; otherwise, false</returns>
+        /// <returns>True if <paramref name="source"/> starts with at least one element from <paramref name="elements"/>; otherwise, false</returns>
         public static bool StartsWithAny(this string source, params string[] elements)
         {
             return elements.Any(source.StartsWith);
         }
 
+        /// <summary>
+        /// Checks if <paramref name="source"/> ends with any string from <paramref name="elements"/> array
+        /// </summary>
+        /// <returns>True if <paramref name="source"/> ends with at least one element from <paramref name="elements"/>; otherwise, false</returns>
         public static bool EndsWithAny(this string source, params string[] elements)
         {
             return elements.Any(source.EndsWith);
         }
 
+        /// <summary>
+        /// Checks if <paramref name="elements"/> contains a <paramref name="source"/>
+        /// </summary>
+        /// <returns>True if <paramref name="elements"/> contains <paramref name="source"/>; otherwise, false</returns>
         public static bool IsAnyOf(this string source, params string[] elements)
         {
             return elements.Any(source.Equals);
@@ -47,7 +58,9 @@ namespace Extensions2
             return !IsAnyOf(source, elements);
         }
 
-        //Todo: comments
+        /// <summary>
+        /// Removes all occurences of all <paramref name="characters"/> elements from initial string
+        /// </summary>
         public static string RemoveAll(this string source, params char[] characters)
         {
             foreach (var ch in characters)
@@ -55,15 +68,19 @@ namespace Extensions2
                 var firstOccurrence = source.IndexOf(ch);
                 while (firstOccurrence != -1)
                 {
-                    source = source.SubstringOnIndex(0, firstOccurrence - 1) +
-                             source.SubstringOnIndex(firstOccurrence + 1, source.Length - 1);
+                    source = source.SubstringOnIndex(0, firstOccurrence - 1) + source.SubstringOnIndex(firstOccurrence + 1, source.Length - 1);
                     firstOccurrence = source.IndexOf(ch);
                 }
             }
             return source;
         }
 
-        //Todo: comments
+        /// <summary>
+        /// Removes all occurences of all <paramref name="toRemove"/> elements from initial string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="toRemove"></param>
+        /// <returns></returns>
         public static string RemoveAll(this string source, params string[] toRemove)
         {
             foreach (var s in toRemove)
@@ -71,8 +88,7 @@ namespace Extensions2
                 var firstOccurrence = source.IndexOf(s);
                 while (firstOccurrence != -1)
                 {
-                    source = source.SubstringOnIndex(0, firstOccurrence - 1) +
-                             source.SubstringOnIndex(firstOccurrence + s.Length, source.Length - 1);
+                    source = source.SubstringOnIndex(0, firstOccurrence - 1) + source.SubstringOnIndex(firstOccurrence + s.Length, source.Length - 1);
                     firstOccurrence = source.IndexOf(s);
                 }
             }
@@ -115,6 +131,37 @@ namespace Extensions2
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        ///   Gets list of positions of <paramref name = "substring" /> occurences inside <paramref name = "source" />
+        /// </summary>
+        public static IEnumerable<int> SubstringPositions(this string source, string substring)
+        {
+            Contract.Requires<ArgumentNullException>(source != null);
+            var positions = new List<Int32>();
+            var currentCharacter = 0;
+            if (source.Contains(substring))
+            {
+                while (source.Contains(substring))
+                {
+                    var position = source.IndexOf(substring, currentCharacter);
+                    if (position < 0)
+                    {
+                        break;
+                    }
+                    positions.Add(position);
+                    if (currentCharacter + position + substring.Length < source.Length)
+                    {
+                        currentCharacter = position + substring.Length;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            return positions;
         }
     }
 }
