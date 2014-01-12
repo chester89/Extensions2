@@ -11,4 +11,8 @@
     <summary>Extensions</summary>
     <language>en-US</language>
   </metadata>
+  <files>
+        <file src="..\src\Extensions2\bin\Debug\Extensions2.dll" target="lib\net40" />
+        <file src="..\src\Extensions2\bin\Debug\Extensions2.xml" target="lib\net40" />
+  </files>
 </package>
