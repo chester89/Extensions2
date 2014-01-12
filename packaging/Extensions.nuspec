@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>Extensions dev</id>
+    <id>Extensions.develop</id>
     <version>0.1.1.1</version>
     <authors>Chermennov Gleb</authors>
     <owners>Chermennov Gleb</owners>
