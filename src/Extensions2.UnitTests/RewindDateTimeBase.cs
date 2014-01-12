@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace Extensions2.UnitTests
 {
-    public class RewindDateTimeBase
+    public abstract class RewindDateTimeBase
     {
         protected static DayOfWeek RewindParameter;
         protected static int DaysInAWeek = 7;

@@ -132,5 +132,36 @@ namespace Extensions2
             }
             return result;
         }
+
+        /// <summary>
+        ///   Gets list of positions of <paramref name = "substring" /> occurences inside <paramref name = "source" />
+        /// </summary>
+        public static IEnumerable<int> SubstringPositions(this string source, string substring)
+        {
+            Contract.Requires<ArgumentNullException>(source != null);
+            var positions = new List<Int32>();
+            var currentCharacter = 0;
+            if (source.Contains(substring))
+            {
+                while (source.Contains(substring))
+                {
+                    var position = source.IndexOf(substring, currentCharacter);
+                    if (position < 0)
+                    {
+                        break;
+                    }
+                    positions.Add(position);
+                    if (currentCharacter + position + substring.Length < source.Length)
+                    {
+                        currentCharacter = position + substring.Length;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            return positions;
+        }
     }
 }

@@ -116,5 +116,25 @@ namespace Extensions2.UnitTests
                 Assert.False(input.ContainsAny(chars));
             }
         }
+
+        public class SubstringPositionsTests
+        {
+            [Theory]
+            [InlineData("How did you get in here?", "times")]
+            [InlineData("It was not part of the plan", "parts")]
+            public void Should_Return_EmptySequence_When_There_Are_NoSubstringOccurrences(string input, string sub)
+            {
+                Assert.False(input.SubstringPositions(sub).Any());
+            }
+
+            [Theory]
+            [InlineData("Where are you? Are you at home or at work?", "you", new [] { 10, 19 })]
+            [InlineData("Where are you? Are you at home or at work?", "at", new [] { 23, 34 })]
+            [InlineData("Because of several major failures, we are unable to do this right now, and of course we are sincerely sorry", "we", new [] { 35, 85 })]
+            public void Should_Return_Right_Sequence_Where_There_Are_Occurences(string input, string sub, int[] positions)
+            {
+                Assert.Equal(input.SubstringPositions(sub), positions);
+            }
+        }
     }
 }
