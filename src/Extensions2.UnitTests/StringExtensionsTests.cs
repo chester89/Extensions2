@@ -80,5 +80,41 @@ namespace Extensions2.UnitTests
                 Assert.Throws<TraceAssertException>(() => (null as string).SubstringCount("hello"));
             }
         }
+
+        public class ContainsAnyCharactersTests
+        {
+            [Theory]
+            [InlineData("hello world", new [] { 'l' })]
+            [InlineData("this was one hell of a ride", new [] { 'e' })]
+            [InlineData("We're very convinced we can Stop this", new [] { 'c', 'r' })]
+            public void Returns_True_When_Characters_Has_Multiple_Occurences(string input, Char[] chars)
+            {
+                Assert.True(input.ContainsAny(chars));
+            }
+
+            [Theory]
+            [InlineData("Doug missed his flyght today", new [] { 'f' })]
+            [InlineData("This can't be done on time, I'm afraid", new [] { 'I' })]
+            public void Returns_True_When_Characters_HasOneOccurence(string input, Char[] chars)
+            {
+                Assert.True(input.ContainsAny(chars));
+            }
+
+            [Theory]
+            [InlineData("We're running out of time", new [] { 'h', 'q', 'p' })]
+            [InlineData("This would be much easier if we stop them", new [] { 'k', 'q' })]
+            public void Returns_False_When_Character_HasNoOcurrences(String input, Char[] chars)
+            {
+                Assert.False(input.ContainsAny(chars));
+            }
+
+            [Theory]
+            [InlineData("That shouldn't happened if you did a better job", new [] { 'S' })]
+            [InlineData("You made tremendous effort", new [] { 'F' })]
+            public void Returns_False_When_Character_Present_But_Casing_Doesnt_Match(string input, Char[] chars)
+            {
+                Assert.False(input.ContainsAny(chars));
+            }
+        }
     }
 }
