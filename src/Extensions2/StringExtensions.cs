@@ -163,5 +163,21 @@ namespace Extensions2
             }
             return positions;
         }
+
+        ///<summary>
+        ///Gets part of a source string before the first delimiter occurence
+        ///</summary>
+        public static String Before(this String source, String delimiter) 
+        {
+            return source.IndexOf(delimiter) < 0? source: source.Substring(0, source.IndexOf(delimiter));
+        }
+
+        ///<summary>
+        ///Gets part of a source string after the first delimiter occurence
+        ///</summary>
+        public static String After(this String source, String delimiter)
+        {
+            return source.IndexOf(delimiter) < 0? source: source.Substring(source.IndexOf(delimiter) + delimiter.Length);
+        }
     }
 }
